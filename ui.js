@@ -75,6 +75,56 @@
     hint.textContent = 'Datorā ērtāk rakstīt e-pastu vai nokopēt tekstu. Telefonā SMS poga atvērs īsziņu ar gatavu tekstu.';
   }
 
+  /* ---------- foto skatītājs: viss foto uz ekrāna, bez ritināšanas; bez JS saite atver failu ---------- */
+  var lb = q('#lb'), links = qa('a[data-lb]');
+  if (lb && typeof lb.showModal === 'function' && links.length) {
+    var lbImg = q('#lbImg'), lbCap = q('#lbCap'), lbCount = q('#lbCount'), full = q('.lb__full', lb);
+    var cur = 0, opener = null, sx = null;
+    var show = function (i) {
+      cur = (i + links.length) % links.length;
+      var a = links[cur], img = a.querySelector('img'), fc = a.parentNode.querySelector('figcaption');
+      lbImg.src = a.getAttribute('href');
+      lbImg.alt = img ? img.alt : '';
+      lbCap.textContent = fc ? fc.textContent.trim() : '';
+      lbCap.hidden = !lbCap.textContent;
+      lbCount.textContent = (cur + 1) + ' / ' + links.length;
+      /* kaimiņu foto ielādējam iepriekš, lai pārslēgšana būtu bez gaidīšanas */
+      [cur + 1, cur - 1].forEach(function (k) { var n = links[(k + links.length) % links.length]; (new Image()).src = n.getAttribute('href'); });
+    };
+    links.forEach(function (a, i) {
+      a.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        e.preventDefault(); opener = a; show(i); lb.showModal();
+      });
+    });
+    q('.lb__close', lb).addEventListener('click', function () { lb.close(); });
+    q('.lb__prev', lb).addEventListener('click', function () { show(cur - 1); });
+    q('.lb__next', lb).addEventListener('click', function () { show(cur + 1); });
+    lb.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
+    });
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lb__fig')) lb.close(); });
+    lb.addEventListener('pointerdown', function (e) { sx = e.pointerType === 'mouse' ? null : e.clientX; });
+    lb.addEventListener('pointerup', function (e) {
+      if (sx === null) return;
+      var dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
+    });
+    lb.addEventListener('close', function () {
+      if (document.fullscreenElement) document.exitFullscreen().catch(function () {});
+      lbImg.src = 'data:,';
+      if (opener) opener.focus({ preventScroll: true });
+    });
+    if (full && lb.requestFullscreen) {
+      full.hidden = false;
+      full.addEventListener('click', function () {
+        if (document.fullscreenElement) document.exitFullscreen().catch(function () {});
+        else lb.requestFullscreen().catch(function () {});
+      });
+    }
+  }
+
   /* ---------- zvana josla: parādās, kad sienas zvana poga pazudusi, un paslēpjas pie kontaktiem ---------- */
   var bar = q('#callbar'), heroCall = q('#heroCall'), contacts = q('#kontakti');
   if (bar && heroCall && contacts && 'IntersectionObserver' in window) {

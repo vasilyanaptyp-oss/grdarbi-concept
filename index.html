@@ -282,25 +282,20 @@ section{position:relative}
 .card{position:relative;padding:22px 22px 18px;background:var(--putty) url(img/putty.webp) -200px -90px/768px}
 .card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:rgba(255,252,245,.6)}
 
-.print{position:relative;margin:0;justify-self:start;max-width:440px;--r:.6deg;transform:rotate(var(--r))}
+.print{position:relative;margin:0;justify-self:start;max-width:400px;--r:.6deg;transform:rotate(var(--r))}
 .print__img{padding:7px;background:var(--lime);box-shadow:0 1px 2px rgba(36,32,27,.22),0 10px 22px -12px rgba(36,32,27,.5)}
 .print::before,.print::after{content:"";position:absolute;z-index:2;top:-12px;width:78px;height:26px;background:var(--tape) url(img/tape.webp) 0 0/320px 100%;opacity:.94}
 .print::before{left:-14px;transform:rotate(-24deg)}
 .print::after{right:-14px;transform:rotate(21deg)}
 .print figcaption{margin-top:12px;font-size:1rem;line-height:1.4;color:var(--ink-2);max-width:26em}
 
-.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:420px}
-.swatch{margin:0}
-.swatch i{display:block;aspect-ratio:3/4;border:6px solid var(--lime);box-shadow:0 1px 2px rgba(36,32,27,.22),0 8px 18px -10px rgba(36,32,27,.5)}
-.swatch figcaption{display:inline-block;margin-top:10px;padding:3px 8px;background:var(--putty);font-size:.9375rem;line-height:1.25;color:var(--ink)}
-.sw-rough{background:var(--rough) url(img/rough.webp) -60px -30px/384px}
-.sw-putty{background:var(--putty) url(img/putty.webp) -90px -10px/384px}
-.sw-paint{background:var(--paint) url(img/paint.webp) 0 0/256px}
-.illu{display:inline-block;margin:12px 0 0;padding:3px 8px;background:var(--putty);font-size:.9375rem;color:var(--ink-2)}
-
-.apm{padding:26px 0}
-.apm .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px}
-.apm p{margin:0;font:800 clamp(1.375rem,2.6vw,2rem)/1.15 var(--disp);font-stretch:96%;color:var(--ink-h)}
+.print__img{display:block;position:relative;text-decoration:none;cursor:zoom-in}
+.print__img img{width:100%}
+.print__img:focus-visible{outline-offset:6px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pair .print:last-child{margin-top:34px}
+.w4 .card .btn{margin-top:4px}
+.w4 .card p{font:800 clamp(1.375rem,2.4vw,1.875rem)/1.15 var(--disp);font-stretch:96%;color:var(--ink-h);margin-bottom:18px}
 
 @media (min-width:900px){
   .work__grid{grid-template-columns:repeat(12,1fr);grid-template-rows:auto 1fr;gap:20px 28px;align-items:start}
@@ -309,26 +304,51 @@ section{position:relative}
   .w1 .print{grid-column:8 / 13;grid-row:1 / span 2;justify-self:end;margin-top:14px}
   .w2 .work__head{grid-column:1 / 7}
   .w2 .card{grid-column:1 / 8}
-  .w2 .swatches-wrap{grid-column:9 / 13;grid-row:1 / span 2;align-self:end}
+  .w2 .print{grid-column:9 / 13;grid-row:1 / span 3;justify-self:end;max-width:360px}
+  .w4 .work__head{grid-column:1 / 6}
+  .w4 .card{grid-column:1 / 6;align-self:start}
+  .w4 .pair{grid-column:7 / 13;grid-row:1 / span 3;gap:26px}
   .w3 .print{grid-column:1 / 6;grid-row:1 / span 2;--r:-.8deg;margin-top:14px}
   .w3 .work__head{grid-column:7 / 13}
   .w3 .work__txt{grid-column:7 / 13}
 }
 
 /* foto */
-.photos{padding-bottom:clamp(56px,8vw,110px)}
-.photos__grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px;max-width:660px}
-.photos .print{max-width:none}
-.photos .print:first-child{--r:-1.2deg}
-.photos .print:last-child{--r:.9deg;margin-top:18px}
-.print__img{position:relative}
+.photos{padding-bottom:clamp(64px,9vw,120px)}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 16px;align-items:start}
+.gallery .print{max-width:none}
+.gallery .print:nth-child(even){margin-top:40px}
 .ptape{position:absolute;z-index:3;left:10px;bottom:-15px;--r:-2deg}
-.photos .print figcaption{margin-top:28px}
+.rough .print figcaption{display:inline-block;padding:3px 9px;background:var(--putty);color:var(--ink)}
+.gcta{display:flex;flex-direction:column;align-items:flex-start;gap:12px;align-self:center;padding:22px 20px}
+.gcta p{margin:0;font:800 clamp(1.25rem,1.9vw,1.5rem)/1.1 var(--disp);font-stretch:96%;color:var(--ink-h)}
+.gcta .btn{padding-inline:16px;max-width:100%}
+@media (max-width:599.98px){.gcta{padding:18px 14px}}
+.print:has(.ptape) figcaption{margin-top:26px}
 @media (min-width:900px){
-  .photos .wrap{display:grid;grid-template-columns:4fr 7fr;gap:40px;align-items:start}
-  .photos .sec-head{padding-top:clamp(56px,9vw,120px)}
-  .photos__grid{margin-top:clamp(56px,9vw,120px);gap:24px 30px}
+  .photos .wrap{display:grid;grid-template-columns:4fr 8fr;gap:44px;align-items:start}
+  .photos .sec-head{position:sticky;top:0}
+  .gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 28px;padding-top:clamp(56px,9vw,120px)}
+  .gallery .print:nth-child(even){margin-top:0}
+  .gallery .print:nth-child(3n+2){margin-top:64px}
 }
+
+/* foto skatītājs */
+.lb{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(22,19,16,.95);color:var(--lime);overflow:hidden}
+.lb::backdrop{background:rgba(22,19,16,.6)}
+.lb__fig{position:absolute;inset:56px 12px 64px;margin:0;display:flex;align-items:center;justify-content:center}
+.lb__fig img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;box-shadow:0 20px 60px -20px rgba(0,0,0,.8);border:6px solid var(--lime)}
+.lb__cap{position:absolute;left:50%;bottom:-48px;transform:translateX(-50%) rotate(-1deg);max-width:calc(100% - 24px);white-space:normal;text-align:center;text-transform:none;letter-spacing:.01em;font-size:.9375rem}
+.lb__btn{position:absolute;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border:0;border-radius:3px;background:var(--lime);color:var(--ink);cursor:pointer}
+.lb__btn .ico{width:24px;height:24px}
+.lb__close{top:8px;right:8px}
+.lb__full{top:8px;right:64px}
+.lb__prev{left:8px;top:50%;transform:translateY(-50%)}
+.lb__next{right:8px;top:50%;transform:translateY(-50%)}
+.lb__count{position:absolute;top:18px;left:16px;margin:0;font:700 .9375rem/1 var(--tapef);letter-spacing:.06em}
+.lb :focus-visible{outline-color:var(--tape)}
+@media (min-width:900px){.lb__fig{inset:64px 84px 72px}}
+@media (hover:hover) and (pointer:fine){.lb__btn:hover{background:#fff}}
 
 /* pieteikums */
 .req{padding-bottom:clamp(60px,9vw,120px)}
@@ -463,7 +483,7 @@ section{position:relative}
           </div>
         </div>
         <div class="swipe" id="swipe">
-          <p class="lead">Veicu visa veida iekšdarbus, fasāžu apmešanu un krāsošanu, logu un durvju maiņu un to apdari. Specializējos grīdas un sienu apdarē.</p>
+          <p class="lead">Veicu visus iekšdarbus, fasāžu un citus apmešanas darbus, logu un durvju maiņu un to apdari. Specializējos grīdas un sienu apdarē.</p>
           <div class="cta">
             <a class="btn btn-paint" id="heroCall" href="tel:+37127160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>Zvanīt <span class="num"><span class="call-cc">+371 </span>27160478</span></span></a>
             <a class="btn btn-line" data-sms href="sms:+37127160478?&amp;body=Labdien!%0AKas%20j%C4%81dara%3A%20%0AKur%20(pils%C4%93ta%20vai%20pagasts)%3A%20%0AAptuven%C4%81%20plat%C4%ABba%2C%20m%C2%B2%3A%20"><svg class="ico" aria-hidden="true"><use href="#i-sms"/></svg>Sūtīt SMS</a>
@@ -517,7 +537,7 @@ section{position:relative}
         <h3 class="rv-wipe" id="h-iek">Iekšdarbi</h3>
       </div>
       <div class="work__txt">
-        <p>Specializējos sienu un grīdas apdarē: sienas — no pilnas špaktelēšanas līdz krāsošanai.</p>
+        <p>Veicu visus iekšdarbus. Specializējos sienu un grīdas apdarē: sienas — no pilnas špaktelēšanas līdz krāsošanai.</p>
         <ul class="chips" aria-label="Iekšdarbi">
           <li><span class="tape">pilna špaktelēšana</span></li>
           <li><span class="tape">krāsošana</span></li>
@@ -526,8 +546,8 @@ section{position:relative}
         </ul>
       </div>
       <figure class="print">
-        <div class="print__img"><img src="img/sienu-spaktelesana.webp" width="682" height="512" loading="lazy" decoding="async" alt="Telpa remonta laikā ar jauniem logiem."></div>
-        <figcaption>Griesti jau gludi, uz sienām — pirmie špakteles laukumi.</figcaption>
+        <a class="print__img" href="img/work/istaba-logs-1600.webp" data-lb><img src="img/work/istaba-logs-720.webp" srcset="img/work/istaba-logs-720.webp 720w, img/work/istaba-logs-1600.webp 1600w" sizes="(min-width: 900px) 400px, 88vw" width="720" height="960" loading="lazy" decoding="async" alt="Istaba ar gaišām sienām, logu un koka grīdu."></a>
+        <figcaption>Istaba pēc darbiem: gaišas sienas, koka grīda.</figcaption>
       </figure>
     </div>
   </article>
@@ -547,14 +567,10 @@ section{position:relative}
           <li><span class="tape">fasādes apdare</span></li>
         </ul>
       </div>
-      <div class="swatches-wrap">
-        <div class="swatches" aria-hidden="true">
-          <figure class="swatch"><i class="sw-rough"></i><figcaption>apmetums</figcaption></figure>
-          <figure class="swatch"><i class="sw-putty"></i><figcaption>izlīdzināts</figcaption></figure>
-          <figure class="swatch"><i class="sw-paint"></i><figcaption>nokrāsots</figcaption></figure>
-        </div>
-        <p class="illu" aria-hidden="true">Ilustrācija: fasādes kārtas.</p>
-      </div>
+      <figure class="print" style="--r:-.7deg">
+        <a class="print__img" href="img/work/fasade-nojume-1600.webp" data-lb><img src="img/work/fasade-nojume-720.webp" srcset="img/work/fasade-nojume-720.webp 720w, img/work/fasade-nojume-1600.webp 1600w" sizes="(min-width: 900px) 400px, 88vw" width="720" height="960" loading="lazy" decoding="async" alt="Gaiši pelēka apmesta māja ar sarkanu jumtu un nojumi virs ieejas."></a>
+        <figcaption>Apmesta un nokrāsota fasāde.</figcaption>
+      </figure>
     </div>
   </article>
 
@@ -562,7 +578,7 @@ section{position:relative}
   <article class="work w3" id="logi-durvis" aria-labelledby="h-logi">
     <div class="wrap work__grid">
       <figure class="print">
-        <div class="print__img"><img src="img/logu-maina.webp" width="682" height="512" loading="lazy" decoding="async" alt="Skats uz jaunu logu no telpas, aiz loga zaļumi un koki."></div>
+        <a class="print__img" href="img/logu-maina.webp" data-lb><img src="img/logu-maina.webp" width="682" height="512" loading="lazy" decoding="async" alt="Skats uz jaunu logu no telpas, aiz loga zaļumi un koki."></a>
         <figcaption>Jauns logs vēl aizsargplēvē, aile jau apdarināta.</figcaption>
       </figure>
       <div class="work__head">
@@ -580,28 +596,64 @@ section{position:relative}
     </div>
   </article>
 
-  <div class="apm rough">
-    <div class="wrap">
-      <p>Apmešanas darbus veicu gan iekštelpās, gan uz fasādēm.</p>
-      <a class="btn btn-paint" href="tel:+37127160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Zvanīt <span class="num">27160478</span></a>
+  <div class="ridge rv" aria-hidden="true"></div>
+  <article class="work w4 rough" id="apmesana" aria-labelledby="h-apm">
+    <div class="wrap work__grid">
+      <div class="work__head">
+        <span class="tape work__no">04</span>
+        <h3 class="rv-wipe" id="h-apm">Apmešana</h3>
+      </div>
+      <div class="card">
+        <p>Apmešanas darbus veicu gan iekštelpās, gan uz fasādēm.</p>
+        <a class="btn btn-paint" href="tel:+37127160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Zvanīt <span class="num">27160478</span></a>
+      </div>
+      <div class="pair">
+        <figure class="print" style="--r:-1.1deg">
+        <a class="print__img" href="img/work/apmetums-aile-1600.webp" data-lb><img src="img/work/apmetums-aile-720.webp" srcset="img/work/apmetums-aile-720.webp 720w, img/work/apmetums-aile-1600.webp 1600w" sizes="(min-width: 900px) 280px, 44vw" width="720" height="960" loading="lazy" decoding="async" alt="Telpa ar svaigi apmestām pelēkām sienām un durvju aili."><span class="tape ptape" aria-hidden="true">Iekštelpā</span></a>
+        <figcaption>Svaigs apmetums iekštelpā.</figcaption>
+      </figure>
+        <figure class="print" style="--r:.9deg">
+        <a class="print__img" href="img/work/fasade-durvis-1600.webp" data-lb><img src="img/work/fasade-durvis-720.webp" srcset="img/work/fasade-durvis-720.webp 720w, img/work/fasade-durvis-1600.webp 1600w" sizes="(min-width: 900px) 280px, 44vw" width="720" height="960" loading="lazy" decoding="async" alt="Apmesta mājas siena ar durvīm un garāžas vārtiem."><span class="tape ptape" aria-hidden="true">Fasāde</span></a>
+        <figcaption>Apmesta fasāde.</figcaption>
+      </figure>
+      </div>
     </div>
-  </div>
+  </article>
 </section>
 
 <section class="photos" id="foto" aria-labelledby="h-foto">
+  <div class="ridge" aria-hidden="true"></div>
   <div class="wrap">
     <div class="sec-head">
       <h2 class="h2 rv-wipe" id="h-foto">Foto no darbiem</h2>
+      <p class="sec-lede">No maniem objektiem. Atveriet foto, lai to apskatītu visā ekrānā.</p>
     </div>
-    <div class="photos__grid">
-      <figure class="print">
-        <div class="print__img"><img src="img/pirms-remonta.webp" width="384" height="512" loading="lazy" decoding="async" alt="Istaba ar vecām tapetēm un nolietotu koka grīdu."><span class="tape ptape" aria-hidden="true">Pirms remonta</span></div>
-        <figcaption class="sr">Pirms remonta</figcaption>
+    <div class="gallery">
+      <figure class="print" style="--r:-1deg">
+        <a class="print__img" href="img/work/istaba-gaisa-1600.webp" data-lb><img src="img/work/istaba-gaisa-720.webp" srcset="img/work/istaba-gaisa-720.webp 720w, img/work/istaba-gaisa-1600.webp 1600w" sizes="(min-width: 900px) 240px, 44vw" width="720" height="960" loading="lazy" decoding="async" alt="Istaba ar gaišām sienām, trīsdaļīgu logu un koka grīdu."><span class="tape ptape" aria-hidden="true">Istaba</span></a>
+        <figcaption>Istaba ar koka grīdu.</figcaption>
       </figure>
-      <figure class="print">
-        <div class="print__img"><img src="img/pec-remonta.webp" width="384" height="512" loading="lazy" decoding="async" alt="Istaba ar gludām, gaiši krāsotām sienām."><span class="tape ptape" aria-hidden="true">Pēc remonta</span></div>
-        <figcaption><span class="sr">Pēc remonta. </span>Grīda vēl apsegta ar papīru.</figcaption>
+      <figure class="print" style="--r:.8deg">
+        <a class="print__img" href="img/work/gaitenis-lente-1600.webp" data-lb><img src="img/work/gaitenis-lente-720.webp" srcset="img/work/gaitenis-lente-720.webp 720w, img/work/gaitenis-lente-1600.webp 1600w" sizes="(min-width: 900px) 240px, 44vw" width="720" height="960" loading="lazy" decoding="async" alt="Gaitenis ar nokrāsotām sienām un koka durvīm, pie griestiem vēl līmlente."><span class="tape ptape" aria-hidden="true">Gaitenis</span></a>
+        <figcaption>Gaitenis — pie griestiem vēl līmlente.</figcaption>
       </figure>
+      <figure class="print" style="--r:-.6deg">
+        <a class="print__img" href="img/work/fasade-varti-1600.webp" data-lb><img src="img/work/fasade-varti-720.webp" srcset="img/work/fasade-varti-720.webp 720w, img/work/fasade-varti-1600.webp 1600w" sizes="(min-width: 900px) 240px, 44vw" width="720" height="960" loading="lazy" decoding="async" alt="Apmesta mājas fasāde ar garāžas vārtiem un sarkanu jumtu."><span class="tape ptape" aria-hidden="true">Fasāde</span></a>
+        <figcaption>Fasāde ar garāžas vārtiem.</figcaption>
+      </figure>
+      <figure class="print" style="--r:1.1deg">
+        <a class="print__img" href="img/work/apmetums-sienas-1600.webp" data-lb><img src="img/work/apmetums-sienas-720.webp" srcset="img/work/apmetums-sienas-720.webp 720w, img/work/apmetums-sienas-1600.webp 1600w" sizes="(min-width: 900px) 240px, 44vw" width="720" height="960" loading="lazy" decoding="async" alt="Svaigi apmestas pelēkas sienas, telpā kāpnes."><span class="tape ptape" aria-hidden="true">Apmetums</span></a>
+        <figcaption>Sienas pēc apmešanas.</figcaption>
+      </figure>
+      <figure class="print" style="--r:-.9deg">
+        <a class="print__img" href="img/work/gaitenis-apmetums-1600.webp" data-lb><img src="img/work/gaitenis-apmetums-720.webp" srcset="img/work/gaitenis-apmetums-720.webp 720w, img/work/gaitenis-apmetums-1600.webp 1600w" sizes="(min-width: 900px) 240px, 44vw" width="720" height="960" loading="lazy" decoding="async" alt="Šaurs gaitenis pēc apmešanas, no sienām vēl nāk vadi."><span class="tape ptape" aria-hidden="true">Apmetums</span></a>
+        <figcaption>Gaitenis pēc apmešanas.</figcaption>
+      </figure>
+      <div class="card gcta">
+        <p>Vajag līdzīgu darbu?</p>
+        <a class="btn btn-paint" href="tel:+37127160478" aria-label="Zvanīt: +371 27160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Zvanīt</a>
+        <a class="tlink" href="#pieteikums">Uzrakstīt ziņu</a>
+      </div>
     </div>
   </div>
 </section>
@@ -701,6 +753,15 @@ Aptuvenā platība, m²: </output>
   <span class="tape">Koncepts — neoficiāla mājaslapa</span>
   <p>GR DARBI, IK · Kuldīga</p>
 </footer>
+
+<dialog class="lb" id="lb" aria-label="Foto">
+  <figure class="lb__fig"><img id="lbImg" src="data:," alt=""><figcaption class="tape lb__cap" id="lbCap"></figcaption></figure>
+  <button class="lb__btn lb__close" type="button" aria-label="Aizvērt"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <button class="lb__btn lb__prev" type="button" aria-label="Iepriekšējais foto"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg></button>
+  <button class="lb__btn lb__next" type="button" aria-label="Nākamais foto"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></button>
+  <button class="lb__btn lb__full" type="button" aria-label="Pilnekrāns" hidden><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+  <p class="lb__count num" id="lbCount" aria-live="polite"></p>
+</dialog>
 
 <aside class="callbar" id="callbar" aria-label="Ātrā saziņa">
   <a href="tel:+37127160478" aria-label="Zvanīt: +371 27160478" tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Zvanīt</a>
