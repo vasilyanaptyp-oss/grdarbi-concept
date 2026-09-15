@@ -107,7 +107,8 @@ a{color:inherit}
 .wall{position:relative;overflow:clip;background:var(--rough) url(img/rough.webp) 0 0/384px;container-type:inline-size;contain:paint}
 .wall::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,248,235,.12),rgba(255,248,235,0) 42%,rgba(36,32,27,.07))}
 .bands,.lane,.mtape,.tool,.stage{pointer-events:none}
-.bands{--n:4;position:absolute;left:0;right:0;top:0;height:var(--bands-h,100%);z-index:1}
+.wall__top{position:relative}
+.bands{--n:3;position:absolute;left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));top:-12px;bottom:0;z-index:1}
 .bands::after{content:"";position:absolute;left:0;right:0;top:100%;height:200vh;background:var(--putty) url(img/putty.webp) 0 0/768px}
 .band{position:absolute;left:0;width:100%;top:calc(var(--i) * 100% / var(--n));height:calc(100% / var(--n) + 1px)}
 .strip{position:absolute;inset:0;overflow:hidden}
@@ -118,7 +119,7 @@ a{color:inherit}
 .rail{position:absolute;inset:0;display:none}
 .edge{position:absolute;top:0;bottom:0;right:-30px;width:56px;background:url(img/edge.webp) 0 0/56px 512px repeat-y}
 .band:nth-child(even) .edge{right:auto;left:-30px;transform:scaleX(-1)}
-.bands .band:nth-child(n+5){display:none}
+.bands .band:nth-child(n+4){display:none}
 
 .lane{display:none}
 .patch{position:relative;z-index:7}
@@ -132,7 +133,7 @@ a{color:inherit}
 .swipe .cta{order:-1}
 .swipe{display:flex;flex-direction:column}
 .swipe .lead{margin:16px 0 0}
-.tapebar{position:relative;z-index:7;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+.tapebar{position:relative;z-index:7;display:flex;align-items:center;justify-content:space-between;gap:12px;height:48px}
 .brandtape{--r:-1.5deg}
 .calltape{--r:1deg;min-height:44px;padding:8px 14px 7px;font-size:1rem;letter-spacing:.03em}
 .calltape .ico{width:18px;height:18px}
@@ -209,8 +210,9 @@ a{color:inherit}
 @media (min-width:1024px) and (min-height:620px){
   .wall{height:100vh;height:100svh;container-type:size}
   .wall{--fs:min(11.2cqw,calc((100cqh - 360px) / 3.15));--lane-l:calc(56px + var(--fs) * 4.08);--lane-w:calc(var(--fs) * 3.02);--patch-h:clamp(200px,30cqh,300px);background-size:768px}
-  .bands{--n:5;height:100%}
-  .bands .band:nth-child(n+5){display:block}
+  .wall__top{display:contents}
+  .bands{--n:5;left:0;right:0;top:0}
+  .bands .band:nth-child(n+4){display:block}
   .wall__ui{position:absolute;inset:0;padding:0}
   .tapebar{position:absolute;top:14px;left:40px;right:40px}
   .h1{position:absolute;left:56px;top:70px;margin:0;font-size:var(--fs);font-stretch:112%;line-height:1.05}
@@ -430,16 +432,17 @@ section{position:relative}
 <section class="hero" aria-labelledby="h1">
   <div class="wall-track" id="wallTrack">
     <div class="wall" id="wall">
-      <div class="bands" aria-hidden="true">
-        <div class="band" style="--i:0"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
-        <div class="band" style="--i:1"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
-        <div class="band" style="--i:2"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
-        <div class="band" style="--i:3"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
-        <div class="band" style="--i:4"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
-      </div>
       <div class="lane" id="lane" aria-hidden="true"><div class="lane__face"><i class="streaks"></i></div></div>
 
       <div class="wall__ui">
+        <div class="wall__top">
+        <div class="bands" aria-hidden="true">
+          <div class="band" style="--i:0"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+          <div class="band" style="--i:1"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+          <div class="band" style="--i:2"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+          <div class="band" style="--i:3"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+          <div class="band" style="--i:4"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+        </div>
         <div class="tapebar">
           <span class="tape brandtape">GR DARBI, IK</span>
           <a class="tape calltape" href="tel:+37127160478" aria-label="Zvanīt: +371 27160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span class="num">+371 27160478</span></a>
@@ -450,6 +453,7 @@ section{position:relative}
           <li><a class="tape" href="#fasades">Fasādes</a></li>
           <li><a class="tape" href="#logi-durvis">Logi un durvis</a></li>
         </ul>
+        </div>
         <div class="patch on-paint" id="patch">
           <i class="streaks" aria-hidden="true"></i>
           <svg class="patch__map" viewBox="0 0 169 200" aria-hidden="true"><use href="#kurzeme"/><circle class="dot" cx="66.6" cy="93.9" r="9"/></svg>

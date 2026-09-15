@@ -29,7 +29,7 @@
   var lanes = [q('#lane'), q('#laneTop')], laneFaces = lanes.map(function (l) { return q('.lane__face', l); });
   var laneStreaks = q('#lane .streaks'), patch = q('#patch'), patchStreaks = q('.streaks', patch);
   var mtapes = qa('.mtape', wall), mclips = mtapes.map(function (m) { return q('.mtape__clip', m); }), mpaint = mtapes.map(function (m) { return q('.mtape__paint', m); });
-  var stages = qa('.stage span', wall);
+  var stages = qa('.stage span', wall), bandsEl = q('.bands', wall);
 
   var W = function () { return wall.clientWidth; };
   var H = function () { return wall.clientHeight; };
@@ -39,9 +39,10 @@
   }
 
   /* viena josla: špaktele izlīdzina, lāpstiņa brauc pa priekšējo malu */
-  function band(tl, i, at, dur, n, trowelSize, regionH) {
+  function band(tl, i, at, dur, n, trowelSize) {
     var dir = i % 2 ? -1 : 1;
-    var bh = function () { return (regionH ? regionH() : H()) / n; };
+    var bh = function () { return bandsEl.clientHeight / n; };
+    var top = function () { return bandsEl.getBoundingClientRect().top - wall.getBoundingClientRect().top; };
     var T = function () { return trowelSize(); };
     var at0 = at + 0.001; /* ne tieši 0: ritinot atpakaļ līdz sākumam, set tiek atcelts */
     tl.set(rails[i], { autoAlpha: 1 }, at0);
@@ -49,7 +50,7 @@
     tl.fromTo(faces[i], { xPercent: 100 * dir, x: 0 }, { xPercent: 0, duration: dur, ease: 'power1.inOut' }, at);
     tl.set(trowel, {
       autoAlpha: 1, scaleX: dir, rotation: dir * 7, transformOrigin: '50% 50%',
-      y: function () { return bh() * i + bh() / 2 - T() / 2; },
+      y: function () { return top() + bh() * i + bh() / 2 - T() / 2; },
       width: T, height: T
     }, at0);
     /* darba mala: SVG x=190/200 → 95 % platuma; spoguļotā — 5 % */
@@ -130,19 +131,13 @@
   /* ---------- telefons un planšete: īsa secība laikā ---------- */
   mm.add('(max-width: 1023.98px), (max-height: 619.98px)', function () {
     if (!d.classList.contains('wall-start')) return;
-    var N = 3, bandsEl = q('.bands', wall);
-    /* joslas tikai virs parauga: zemāk tās tik un tā sedz teksta laukums */
-    var regionH = function () { return Math.round(patch.getBoundingClientRect().top - wall.getBoundingClientRect().top); };
-    var setRegion = function () { bandsEl.style.setProperty('--bands-h', regionH() + 'px'); };
-    bandsEl.style.setProperty('--n', N);
-    setRegion();
-    G.set(bands.slice(N), { display: 'none' });
+    /* joslas tikai virsraksta zonā (CSS: .wall__top); zemāk tās tik un tā sedz paraugs un teksta laukums */
+    var N = 3;
     G.set(rails, { autoAlpha: 0 });
     G.set([trowel, roller], { autoAlpha: 0 });
-    var trowelSize = function () { return Math.round(Math.min(regionH() / N * 1.1, 170)); };
+    var trowelSize = function () { return Math.round(Math.min(bandsEl.clientHeight / N * 1.1, 170)); };
     var tl = G.timeline({ paused: true, defaults: { ease: 'none' } });
-    for (var i = 0; i < N; i++) band(tl, i, i * 0.4, 0.5, N, trowelSize, regionH);
-    ST.addEventListener('refreshInit', setRegion);
+    for (var i = 0; i < N; i++) band(tl, i, i * 0.4, 0.5, N, trowelSize);
     var t2 = N * 0.4 + 0.2;
     tl.to(trowel, { autoAlpha: 0, duration: 0.2 }, t2 - 0.1);
     /* rullītis pāri paraugam no augšas uz leju */
@@ -164,7 +159,7 @@
       setTimeout(go, 250);
     });
     var st = ST.create({ trigger: wall, start: 'bottom 60px', onEnter: function () { tl.progress(1); } });
-    return function () { st.kill(); ST.removeEventListener('refreshInit', setRegion); bandsEl.style.removeProperty('--bands-h'); bandsEl.style.removeProperty('--n'); };
+    return function () { st.kill(); };
   });
 
   /* ---------- atklāšana zemāk: špakteles vilciens virsrakstiem, līmlentes pielīp ---------- */
