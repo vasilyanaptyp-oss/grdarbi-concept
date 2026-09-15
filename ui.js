@@ -1,0 +1,93 @@
+/* GR DARBI — ziņas sastādīšana (SMS / e-pasts / kopēšana) un piesaistītā zvana josla.
+   Nestrādā ar GSAP un neko negaida: bez šī faila saites tik un tā atver tukšu veidni. */
+(function () {
+  'use strict';
+  var TEL = '+37127160478', MAIL = 'ggghirts51@inbox.lv';
+  var q = function (s, r) { return (r || document).querySelector(s); };
+  var qa = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* ---------- ziņa ---------- */
+  var picks = qa('#pick button'), fWhat = q('#fWhat'), fWhere = q('#fWhere'), fArea = q('#fArea');
+  var out = q('#msgOut'), status = q('#status'), levelTxt = q('#levelTxt'), bubble = q('#bubble'), copyBtn = q('#copyBtn');
+
+  function clean(v) { return (v || '').replace(/\s+/g, ' ').trim(); }
+  function state() {
+    var kas = picks.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return b.getAttribute('data-v'); });
+    return { kas: kas, what: clean(fWhat && fWhat.value), where: clean(fWhere && fWhere.value), area: clean(fArea && fArea.value).replace(/\s*m(2|²)$/i, '') };
+  }
+  function text(st) {
+    var kas = st.kas.join(', ');
+    if (st.what) kas = kas ? kas + ' — ' + st.what : st.what;
+    return 'Labdien!\nKas jādara: ' + kas + '\nKur (pilsēta): ' + st.where + '\nAptuvenā platība, m²: ' + st.area;
+  }
+  function subject(st) {
+    var bits = [st.kas.join(', '), st.where].filter(Boolean);
+    return bits.length ? 'Pieteikums: ' + bits.join(', ') : 'Pieteikums apdares darbiem';
+  }
+  function update() {
+    var st = state(), t = text(st);
+    if (out) out.textContent = t;
+    var sms = 'sms:' + TEL + '?&body=' + encodeURIComponent(t);
+    var mail = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject(st)) + '&body=' + encodeURIComponent(t.replace(/\n/g, '\r\n') + '\r\n\r\nPielikumā — foto (ja ir).');
+    qa('a[data-sms]').forEach(function (a) { a.href = sms; });
+    qa('a[data-mail]').forEach(function (a) { a.href = mail; });
+    var n = (st.kas.length || st.what ? 1 : 0) + (st.where ? 1 : 0) + (st.area ? 1 : 0);
+    if (bubble) bubble.style.transform = 'translateX(' + [34, 22, 10, 0][n] + 'px)';
+    if (levelTxt) levelTxt.textContent = ['Aizpildiet, cik zināt — vai vienkārši zvaniet.', 'Vēl divas rindas, un būs līmenī.', 'Vēl viena rinda, un būs līmenī.', 'Līmenī. Var sūtīt.'][n];
+    document.dispatchEvent(new CustomEvent('gr:msg', { detail: { filled: n } }));
+  }
+  picks.forEach(function (b) {
+    b.addEventListener('click', function () {
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      update();
+    });
+  });
+  [fWhat, fWhere, fArea].forEach(function (f) { if (f) f.addEventListener('input', update); });
+  update();
+
+  /* kopēšana: noder datorā, kur sms: saite neko neatver */
+  if (copyBtn && (navigator.clipboard || document.queryCommandSupported)) {
+    copyBtn.hidden = false;
+    var lbl = copyBtn.querySelector('span'), tm;
+    copyBtn.addEventListener('click', function () {
+      var t = out ? out.textContent : text(state());
+      var done = function () {
+        lbl.textContent = 'Nokopēts';
+        if (status) status.textContent = 'Teksts nokopēts. Ielīmējiet to īsziņā vai e-pastā uz ' + MAIL + '.';
+        clearTimeout(tm); tm = setTimeout(function () { lbl.textContent = 'Kopēt tekstu'; }, 2400);
+      };
+      var legacy = function () {
+        var ta = document.createElement('textarea');
+        ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) { if (status) status.textContent = 'Neizdevās nokopēt — atzīmējiet tekstu un kopējiet paši.'; }
+        document.body.removeChild(ta);
+      };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(done, legacy); else legacy();
+    });
+  }
+
+  /* dators bez skārienekrāna: SMS poga parasti neko neatver */
+  var hint = q('#hint');
+  if (hint && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    hint.textContent = 'Datorā ērtāk rakstīt e-pastu vai nokopēt tekstu. Telefonā SMS poga atvērs īsziņu ar gatavu tekstu.';
+  }
+
+  /* ---------- zvana josla: parādās, kad sienas zvana poga pazudusi, un paslēpjas pie kontaktiem ---------- */
+  var bar = q('#callbar'), heroCall = q('#heroCall'), contacts = q('#kontakti');
+  if (bar && heroCall && contacts && 'IntersectionObserver' in window) {
+    var heroGone = false, contactsIn = false, footIn = false;
+    var set = function () {
+      var on = heroGone && !contactsIn && !footIn;
+      bar.classList.toggle('show', on);
+      qa('a', bar).forEach(function (a) { if (on) a.removeAttribute('tabindex'); else a.setAttribute('tabindex', '-1'); });
+      document.body.style.paddingBottom = on && window.innerWidth < 1024 ? '56px' : '';
+    };
+    new IntersectionObserver(function (e) {
+      heroGone = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; set();
+    }).observe(heroCall);
+    new IntersectionObserver(function (e) { contactsIn = e[0].isIntersecting; set(); }, { rootMargin: '0px 0px -30% 0px' }).observe(contacts);
+    var foot = q('.foot');
+    if (foot) new IntersectionObserver(function (e) { footIn = e[0].isIntersecting; set(); }).observe(foot);
+  }
+})();

@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="lv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>GR DARBI — apmešana, špaktelēšana, krāsošana. Kuldīga un visa Kurzeme</title>
+<meta name="description" content="Iekšdarbi, fasāžu apmešana un krāsošana, logu un durvju maiņa un apdare. Annas 5, Kuldīga. Strādāju visā Kurzemē. Tālr. +371 27160478.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="lv_LV">
+<meta property="og:title" content="Koncepts: GR DARBI — apmetu, špaktelēju, krāsoju">
+<meta property="og:description" content="Koncepts — neoficiāla mājaslapa. Kuldīga, visa Kurzeme.">
+<meta property="og:url" content="https://vasilyanaptyp-oss.github.io/grdarbi-concept/">
+<meta property="og:image" content="https://vasilyanaptyp-oss.github.io/grdarbi-concept/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#C7C0B3">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/anybody.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/rough.webp" as="image" type="image/webp">
+<script>
+/* Siena sākas neapmesta tikai tad, ja kustība atļauta. Bez JS un ar reduced-motion — uzreiz gatava siena. */
+(function () {
+  var d = document.documentElement, c = d.className ? [d.className] : [];
+  c.push('js');
+  var rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sd = navigator.connection && navigator.connection.saveData;
+  if (!rm && !sd) {
+    c.push('wall-start');
+    c.push(matchMedia('(min-width: 1024px) and (min-height: 620px)').matches ? 'wall-scrub' : 'wall-play');
+  }
+  d.className = c.join(' ');
+  /* ja GSAP neatnāk 6 s laikā — gatava siena bez animācijas (garums paliek, ja jau ritināts) */
+  window.GR_FALLBACK = setTimeout(function () {
+    if (window.GR_WALL) return;
+    d.classList.remove('wall-start');
+    if ((window.scrollY || 0) < 8) d.classList.remove('wall-scrub');
+    d.classList.add('wall-done');
+  }, 6000);
+})();
+</script>
+<style>
+@font-face{font-family:"Anybody";font-style:normal;font-weight:600 850;font-stretch:85% 115%;font-display:swap;src:url(fonts/anybody.woff2) format("woff2")}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:400 600;font-display:swap;src:url(fonts/newsreader.woff2) format("woff2")}
+@font-face{font-family:"Anybody Fallback";src:local("Arial Black"),local("ArialMT-Black");size-adjust:96.3%}
+@font-face{font-family:"Anybody Tape Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:700;size-adjust:95.7%}
+@font-face{font-family:"Newsreader Fallback";src:local("Georgia");size-adjust:94.3%}
+
+:root{
+  --rough:#C7C0B3; --putty:#E7E3DB; --putty-2:#DEDAD2;
+  --ink:#24201B; --ink-h:#2B251F; --ink-2:#51483E; --pencil:#45413D;
+  --lime:#F6F3ED; --paint:#5533A6; --paint-deep:#3F2786; --paint-2:#6A52B8;
+  --tape:#E4D6AA; --tape-edge:#C9B77F; --steel:#8E969B;
+  --disp:"Anybody","Anybody Fallback","Arial Black",Arial,sans-serif;
+  --text:"Newsreader","Newsreader Fallback",Georgia,serif;
+  --tapef:"Anybody","Anybody Tape Fallback",Arial,sans-serif;
+  --pad:clamp(16px,4vw,56px); --max:1240px;
+  --ease:cubic-bezier(.22,.8,.24,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--rough)}
+@media (prefers-reduced-motion:no-preference){html:not(.wall-scrub){scroll-behavior:smooth}}
+body{margin:0;background:var(--putty) url(img/putty.webp) 0 0/768px;color:var(--ink);font:400 1.1875rem/1.5 var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,svg{display:block}
+img{max-width:100%;height:auto}
+[hidden]{display:none!important}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:800;line-height:1.04;overflow-wrap:break-word}
+p{margin:0 0 .9em}
+a{color:inherit}
+::selection{background:var(--paint);color:var(--lime)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:2px}
+.on-paint :focus-visible{outline-color:var(--lime)}
+.sr{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-80px;z-index:90;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--ink);color:var(--lime);font:700 1rem/1 var(--disp);text-decoration:none}
+.skip:focus{top:12px}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:22px;height:22px;flex:none}
+.num{font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+/* ---------- līmlente (etiķetes) ---------- */
+.tape{--r:-1deg;display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:6px 14px 5px;background:var(--tape) url(img/tape.webp) 0 0/320px 100%;color:var(--ink);font:700 .875rem/1.1 var(--tapef);font-stretch:100%;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;transform:rotate(var(--r));clip-path:polygon(0 8%,3px 0,calc(100% - 4px) 6%,100% 0,calc(100% - 2px) 50%,100% 94%,calc(100% - 3px) 100%,4px 94%,0 100%,2px 50%);box-shadow:none;white-space:nowrap}
+.tape--lower{text-transform:none;letter-spacing:.01em;font-size:1rem}
+
+/* ---------- pogas ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 22px;border:2px solid transparent;border-radius:3px;font:700 1.0625rem/1.1 var(--disp);font-stretch:96%;letter-spacing:.01em;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s,border-color .15s,color .15s}
+.btn:active{transform:translateY(1px)}
+.btn-paint{background:var(--paint);color:var(--lime)}
+.btn-line{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-lime{background:var(--lime);color:var(--paint-deep)}
+.btn-ghost{background:transparent;color:var(--lime);border-color:var(--lime)}
+@media (hover:hover) and (pointer:fine){
+  .btn-paint:hover{background:var(--paint-deep)}
+  .btn-line:hover{background:var(--putty)}
+  .btn-lime:hover{background:#fff}
+  .btn-ghost:hover{background:rgba(246,243,237,.12)}
+  .tlink:hover{text-decoration-thickness:3px}
+}
+.tlink{display:inline-flex;align-items:center;min-height:44px;font:500 1.0625rem/1.2 var(--text);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+
+/* ================= SIENA (hero) ================= */
+.wall-track{position:relative}
+.wall{position:relative;overflow:clip;background:var(--rough) url(img/rough.webp) 0 0/384px;container-type:inline-size;contain:paint}
+.wall::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,248,235,.12),rgba(255,248,235,0) 42%,rgba(36,32,27,.07))}
+.bands,.lane,.mtape,.tool,.stage{pointer-events:none}
+.bands{--n:4;position:absolute;left:0;right:0;top:0;height:var(--bands-h,100%);z-index:1}
+.band{position:absolute;left:0;width:100%;top:calc(var(--i) * 100% / var(--n));height:calc(100% / var(--n) + 1px)}
+.strip{position:absolute;inset:0;overflow:hidden}
+.face{position:absolute;inset:0;background:var(--putty) url(img/putty.webp) 0 0/768px;background-position:calc(var(--i) * -173px) calc(var(--i) * -211px)}
+.face::before,.face::after{content:"";position:absolute;left:0;right:0;height:2px}
+.face::before{top:0;background:rgba(255,252,245,.55)}
+.face::after{bottom:1px;background:rgba(70,60,50,.16)}
+.rail{position:absolute;inset:0;display:none}
+.edge{position:absolute;top:0;bottom:0;right:-30px;width:56px;background:url(img/edge.webp) 0 0/56px 512px repeat-y}
+.band:nth-child(even) .edge{right:auto;left:-30px;transform:scaleX(-1)}
+.bands .band:nth-child(n+5){display:none}
+
+.lane{display:none}
+.patch{position:relative;z-index:7}
+.patch__map{width:64px;height:auto;flex:none;color:var(--putty)}
+.patch__map{fill:var(--putty)}
+.patch__map .dot{fill:var(--paint-deep);stroke:var(--lime);stroke-width:3}
+.patch__big{margin:0;font:800 1.625rem/1 var(--disp);font-stretch:92%;color:var(--lime)}
+.patch__small{margin:6px 0 0;font:500 .9375rem/1.3 var(--text);color:var(--lime)}
+
+.wall__ui{position:relative;display:flex;flex-direction:column;padding:12px var(--pad) 28px}
+.wall__ui > .kicker{order:4}
+.swipe .cta{order:-1}
+.swipe{display:flex;flex-direction:column}
+.swipe .lead{margin:16px 0 0}
+.tapebar{position:relative;z-index:7;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+.brandtape{--r:-1.5deg}
+.calltape{--r:1deg;min-height:44px;padding:8px 14px 7px;font-size:1rem;letter-spacing:.03em}
+.calltape .ico{width:18px;height:18px}
+.h1{position:relative;z-index:3;margin:14px 0 0;font:820 calc((100cqw - 2 * var(--pad)) / 5.95)/1.05 var(--disp);font-stretch:92%;letter-spacing:-.012em;color:var(--ink-h);text-shadow:.02em .02em 0 rgba(250,246,238,.7)}
+.h1 span{display:block;white-space:nowrap}
+.kicker{position:relative;z-index:7;display:flex;flex-wrap:wrap;gap:10px 12px;margin:14px 0 0;padding:0;list-style:none}
+.kicker li:nth-child(2) .tape{--r:.8deg}
+.kicker li:nth-child(3) .tape{--r:-.5deg}
+.kicker .tape{min-height:44px;font-size:.8125rem}
+.patch{display:flex;align-items:center;gap:16px;margin:18px calc(-1 * var(--pad)) 0;padding:18px var(--pad);background:var(--paint) url(img/paint.webp) 0 0/512px;overflow:hidden}
+.patch .streaks{position:absolute;inset:0;background:url(img/streaks.webp) 0 0/256px 512px;opacity:0;pointer-events:none}
+.patch > :not(.streaks){position:relative}
+.swipe{position:relative;z-index:7;margin:18px calc(-1 * var(--pad)) 0;padding:20px var(--pad) 22px;background:var(--putty) url(img/putty.webp) -120px -40px/768px}
+.swipe::before,.swipe::after{content:"";position:absolute;left:0;right:0;height:2px}
+.swipe::before{top:0;background:rgba(255,252,245,.6)}
+.swipe::after{bottom:0;background:rgba(70,60,50,.18)}
+.lead{max-width:34em;margin:0 0 16px;font-size:1.125rem;line-height:1.45}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cta .btn-paint{grid-column:1 / -1}
+.cta .btn{padding-inline:14px}
+.stage{position:absolute;z-index:7;right:var(--pad);bottom:10px;margin:0;display:none}
+.stage span{--r:1.2deg;position:absolute;right:0;bottom:0;visibility:hidden}
+.stage span.on{position:relative;visibility:visible}
+
+/* instrumenti */
+.tool{position:absolute;left:0;top:0;z-index:6;display:none;will-change:transform}
+.trowel{width:160px;height:160px}
+.trowel svg{width:100%;height:100%;overflow:visible;filter:none}
+.roller{width:300px}
+.roller__cyl{position:relative;height:44px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#7B62C9,var(--paint) 45%,var(--paint-deep));box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.nap{position:absolute;left:0;right:0;top:-28px;height:120px;background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 2px,transparent 2px 9px)}
+.roller__cyl::after{content:"";position:absolute;left:8px;right:8px;top:7px;height:5px;border-radius:3px;background:rgba(255,255,255,.28)}
+.roller__wire{position:absolute;left:50%;top:22px;width:calc(50% + 12px);height:70px;overflow:visible}
+.roller__handle{position:absolute;left:calc(50% - 12px);top:90px;width:24px;height:112px;border-radius:12px;background:linear-gradient(90deg,#3a332c,var(--ink) 60%);box-shadow:inset 3px 0 0 rgba(255,255,255,.1)}
+.roller__ferrule{position:absolute;left:calc(50% - 8px);top:84px;width:16px;height:14px;border-radius:3px;background:var(--steel)}
+
+/* masking tape gar joslas malām */
+.mtape{display:none}
+
+/* sākuma stāvoklis (tikai ar JS un atļautu kustību) */
+.wall-start .tool{display:block;visibility:hidden}
+.wall-start .stage{display:block}
+.wall-start .rail{display:block}
+.wall-start .band:nth-child(odd) .strip,.wall-start .band:nth-child(odd) .rail{transform:translateX(-100%)}
+.wall-start .band:nth-child(odd) .face{transform:translateX(100%)}
+.wall-start .band:nth-child(even) .strip,.wall-start .band:nth-child(even) .rail{transform:translateX(100%)}
+.wall-start .band:nth-child(even) .face{transform:translateX(-100%)}
+.wall-start .patch .streaks{opacity:1}
+@media (max-width:1023.98px),(max-height:619.98px){.wall-start .stage{display:none}}
+
+/* planšete */
+@media (min-width:640px){
+  .h1{font-size:calc((100cqw - 2 * var(--pad)) / 6.2);font-stretch:100%}
+  .cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .cta .btn-paint{grid-column:auto}
+  .patch__map{width:84px}
+  .patch__big{font-size:2rem}
+  .lead{font-size:1.25rem}
+  .swipe{margin-inline:0;padding-inline:28px;max-width:720px;clip-path:polygon(0 0,100% 3%,99.4% 100%,.4% 97%)}
+  .patch{margin-inline:0;max-width:720px}
+  .wall__ui > .kicker{order:0}
+  .swipe .cta{order:0}
+  .swipe .lead{margin:0 0 16px}
+}
+
+/* ---------- plats ekrāns: siena ir viss ekrāns ---------- */
+@media (min-width:1024px) and (min-height:620px){
+  .wall{height:100vh;height:100svh;container-type:size}
+  .wall{--fs:min(11.2cqw,calc((100cqh - 360px) / 3.15));--lane-l:calc(56px + var(--fs) * 4.08);--lane-w:calc(var(--fs) * 3.02);--patch-h:clamp(200px,30cqh,300px);background-size:768px}
+  .bands{--n:5;height:100%}
+  .bands .band:nth-child(n+5){display:block}
+  .wall__ui{position:absolute;inset:0;padding:0}
+  .tapebar{position:absolute;top:14px;left:40px;right:40px}
+  .h1{position:absolute;left:56px;top:70px;margin:0;font-size:var(--fs);font-stretch:112%;line-height:1.05}
+  .kicker{position:absolute;top:14px;left:50%;transform:translateX(-50%);margin:0;flex-wrap:nowrap;gap:14px}
+  .kicker .tape{font-size:.875rem}
+  .swipe{position:absolute;left:40px;bottom:24px;width:min(640px,calc(var(--lane-l) - 64px));max-width:none;margin:0;padding:22px 26px 20px 28px}
+  .lead{font-size:clamp(1.0625rem,1.45cqw,1.25rem);margin-bottom:14px}
+  .cta{gap:12px}
+  .cta .btn-mail{min-height:44px;padding:0 4px;border:0;background:none;font:500 1.0625rem/1.2 var(--text);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+  .cta .btn-mail .ico{width:18px;height:18px}
+  .call-cc{display:none}
+  .patch{position:absolute;left:var(--lane-l);width:var(--lane-w);bottom:0;height:var(--patch-h);max-width:none;margin:0;padding:22px 24px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:12px;background:none;overflow:visible}
+  .patch .streaks{display:none}
+  .patch__map{width:auto;height:min(96px,calc(var(--patch-h) - 150px))}
+  .patch__big{font-size:clamp(1.375rem,calc(var(--fs) * .25),2.25rem)}
+  .stage{right:40px;bottom:22px}
+  @media (min-aspect-ratio:19/10){
+    .swipe{left:auto;right:40px;width:min(560px,calc(100cqw - var(--lane-l) - var(--lane-w) - 90px))}
+    .stage{top:70px;bottom:auto}
+  }
+  .lane{display:block;position:absolute;top:0;left:var(--lane-l);width:var(--lane-w);height:100%;overflow:hidden;z-index:2}
+  .lane__face{position:absolute;inset:0;background:var(--paint) url(img/paint.webp) 0 0/512px}
+  .lane .streaks{position:absolute;inset:0;background:url(img/streaks.webp) 0 0/256px 512px;opacity:0}
+  .lane--top{z-index:4}
+  .lane--top .lane__face{background:none}
+  .clone{position:absolute;top:0;left:calc(-1 * var(--lane-l));width:100cqw;height:100cqh}
+  .clone .h1{color:var(--lime);text-shadow:.02em .02em 0 var(--paint-deep)}
+  .mtape{display:block;position:absolute;top:-2px;height:calc(100% - var(--patch-h) + 2px);width:24px;z-index:5;transform-origin:50% 100%}
+  .mtape--l{left:calc(var(--lane-l) - 20px)}
+  .mtape--r{left:calc(var(--lane-l) + var(--lane-w) - 4px)}
+  .mtape__paper{position:absolute;inset:0;background:var(--tape) url(img/tape.webp) 0 0/40px 320px;box-shadow:0 1px 1px rgba(60,50,30,.12)}
+  .mtape__clip{position:absolute;inset:0;overflow:hidden}
+  .mtape__paint{position:absolute;top:0;bottom:0;width:13px;background:var(--paint) url(img/paint.webp) 0 0/512px}
+  .mtape--l .mtape__paint{right:0;clip-path:polygon(100% 0,40% 0,62% 6%,30% 13%,55% 21%,22% 30%,48% 40%,28% 51%,60% 60%,26% 71%,52% 80%,34% 90%,58% 100%,100% 100%)}
+  .mtape--r .mtape__paint{left:0;clip-path:polygon(0 0,58% 0,36% 8%,70% 17%,42% 27%,74% 36%,40% 47%,68% 58%,38% 68%,72% 79%,44% 89%,64% 100%,0 100%)}
+  .mtape{visibility:hidden}
+  .trowel{width:calc(100cqh / 5 * 1.12);height:calc(100cqh / 5 * 1.12)}
+  .roller{width:calc(var(--lane-w) + 12px)}
+  .wall-start .lane{transform:translateY(calc(100% - var(--patch-h)))}
+  .wall-start .lane__face{transform:translateY(calc(-100% + var(--patch-h)))}
+  .wall-start .lane .streaks{opacity:1}
+  .wall-scrub .wall-track{height:250vh;height:250svh}
+  .wall-scrub .wall{position:sticky;top:0}
+}
+
+/* ================= SADAĻAS ================= */
+section{position:relative}
+.works,.photos,.req,.contacts{overflow-x:clip}
+.sec-head{padding-top:clamp(56px,9vw,120px);padding-bottom:clamp(24px,4vw,48px)}
+.h2{font-size:clamp(3rem,7vw,6rem);font-stretch:100%;letter-spacing:-.015em;color:var(--ink-h)}
+.sec-lede{max-width:30em;margin:18px 0 0;font-size:clamp(1.1875rem,1.8vw,1.4375rem);line-height:1.4}
+.ridge{height:4px;background:linear-gradient(180deg,rgba(255,252,245,.7) 0 2px,rgba(70,60,50,.2) 2px 4px);transform-origin:0 50%}
+.rough{background:var(--rough) url(img/rough.webp) 0 0/384px}
+@media (min-width:1024px){.rough{background-size:768px}}
+
+/* darbu joslas */
+.work{padding:clamp(40px,6vw,80px) 0}
+.work__grid{display:grid;gap:22px}
+.work__no{--r:-2deg;margin-bottom:14px}
+.work h3{font-size:clamp(2.5rem,5.4vw,4.75rem);font-stretch:100%;letter-spacing:-.012em;color:var(--ink-h)}
+.work__txt p{max-width:30em;font-size:1.1875rem}
+.chips{display:flex;flex-wrap:wrap;gap:10px 10px;margin:6px 0 0;padding:0;list-style:none}
+.chips li:nth-child(3n+1) .tape{--r:-1.2deg}
+.chips li:nth-child(3n+2) .tape{--r:.9deg}
+.chips li:nth-child(3n) .tape{--r:-.3deg}
+.chips .tape{min-height:36px;font-size:.9375rem;text-transform:none;letter-spacing:.01em;font-stretch:96%}
+.card{position:relative;padding:22px 22px 18px;background:var(--putty) url(img/putty.webp) -200px -90px/768px}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:rgba(255,252,245,.6)}
+
+.print{position:relative;margin:0;justify-self:start;max-width:440px;--r:.6deg;transform:rotate(var(--r))}
+.print__img{padding:7px;background:var(--lime);box-shadow:0 1px 2px rgba(36,32,27,.22),0 10px 22px -12px rgba(36,32,27,.5)}
+.print::before,.print::after{content:"";position:absolute;z-index:2;top:-12px;width:78px;height:26px;background:var(--tape) url(img/tape.webp) 0 0/320px 100%;opacity:.94}
+.print::before{left:-14px;transform:rotate(-24deg)}
+.print::after{right:-14px;transform:rotate(21deg)}
+.print figcaption{margin-top:12px;font-size:1rem;line-height:1.4;color:var(--ink-2);max-width:26em}
+
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:420px}
+.swatch{margin:0}
+.swatch i{display:block;aspect-ratio:3/4;border:6px solid var(--lime);box-shadow:0 1px 2px rgba(36,32,27,.22),0 8px 18px -10px rgba(36,32,27,.5)}
+.swatch figcaption{display:inline-block;margin-top:10px;padding:3px 8px;background:var(--putty);font-size:.9375rem;line-height:1.25;color:var(--ink)}
+.sw-rough{background:var(--rough) url(img/rough.webp) -60px -30px/384px}
+.sw-putty{background:var(--putty) url(img/putty.webp) -90px -10px/384px}
+.sw-paint{background:var(--paint) url(img/paint.webp) 0 0/256px}
+.illu{display:inline-block;margin:12px 0 0;padding:3px 8px;background:var(--putty);font-size:.9375rem;color:var(--ink-2)}
+
+.apm{padding:26px 0}
+.apm .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px}
+.apm p{margin:0;font:800 clamp(1.375rem,2.6vw,2rem)/1.15 var(--disp);font-stretch:96%;color:var(--ink-h)}
+
+@media (min-width:900px){
+  .work__grid{grid-template-columns:repeat(12,1fr);grid-template-rows:auto 1fr;gap:20px 28px;align-items:start}
+  .w1 .work__head{grid-column:1 / 6}
+  .w1 .work__txt{grid-column:1 / 7}
+  .w1 .print{grid-column:8 / 13;grid-row:1 / span 2;justify-self:end;margin-top:14px}
+  .w2 .work__head{grid-column:1 / 7}
+  .w2 .card{grid-column:1 / 8}
+  .w2 .swatches-wrap{grid-column:9 / 13;grid-row:1 / span 2;align-self:end}
+  .w3 .print{grid-column:1 / 6;grid-row:1 / span 2;--r:-.8deg;margin-top:14px}
+  .w3 .work__head{grid-column:7 / 13}
+  .w3 .work__txt{grid-column:7 / 13}
+}
+
+/* foto */
+.photos{padding-bottom:clamp(56px,8vw,110px)}
+.photos__grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px;max-width:660px}
+.photos .print{max-width:none}
+.photos .print:first-child{--r:-1.2deg}
+.photos .print:last-child{--r:.9deg;margin-top:18px}
+.print__img{position:relative}
+.ptape{position:absolute;z-index:3;left:10px;bottom:-15px;--r:-2deg}
+.photos .print figcaption{margin-top:28px}
+@media (min-width:900px){
+  .photos .wrap{display:grid;grid-template-columns:4fr 7fr;gap:40px;align-items:start}
+  .photos .sec-head{padding-top:clamp(56px,9vw,120px)}
+  .photos__grid{margin-top:clamp(56px,9vw,120px);gap:24px 30px}
+}
+
+/* pieteikums */
+.req{padding-bottom:clamp(60px,9vw,120px)}
+.req__grid{display:grid;gap:28px}
+.note{display:grid;gap:20px;margin:0;border:0}
+.card.note{padding:26px 24px 22px}
+.note__row{display:grid;gap:10px}
+.note label,.note legend,.note__lbl{font:700 .875rem/1.2 var(--disp);font-stretch:100%;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);padding:0}
+.note fieldset{margin:0;padding:0;border:0;display:grid;gap:10px}
+.pick{display:flex;flex-wrap:wrap;gap:10px}
+.pick button{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:8px 16px;border:2px solid var(--ink);border-radius:3px;background:transparent;color:var(--ink);font:500 1.0625rem/1.1 var(--text);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s,color .15s}
+.pick button .ico{width:18px;height:18px;display:none}
+.pick button[aria-pressed="true"]{background:var(--paint);border-color:var(--paint);color:var(--lime)}
+.pick button[aria-pressed="true"] .ico{display:block}
+@media (hover:hover) and (pointer:fine){.pick button[aria-pressed="false"]:hover{background:var(--lime)}}
+.field{display:block;width:100%;min-height:52px;padding:10px 2px 8px;border:0;border-bottom:2px solid var(--pencil);border-radius:0;background:transparent;color:var(--ink);font:400 1.25rem/1.3 var(--text);-webkit-appearance:none;appearance:none}
+.field::placeholder{color:#6F665B;opacity:1}
+.field:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.m2{display:flex;align-items:flex-end;gap:10px;max-width:220px}
+.m2 span{font:500 1.25rem/2.4 var(--text)}
+.two{display:grid;gap:20px}
+@media (min-width:600px){.two{grid-template-columns:1.6fr 1fr}}
+.msg{position:relative;margin:0;padding:24px 20px 16px;background:var(--lime);box-shadow:0 1px 2px rgba(36,32,27,.2);font:400 1.0625rem/1.5 var(--text);color:var(--ink)}
+.msg output{display:block;white-space:pre-wrap;min-height:6em}
+.msg__lbl{--r:-1.5deg;position:absolute;top:-14px;left:14px}
+.send{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.send .btn{flex:1 1 auto}
+.status{margin:10px 0 0;font-size:1rem;line-height:1.4;color:var(--ink)}
+.status:empty{display:none}
+#hint{display:inline-block;padding:4px 10px;background:var(--putty)}
+.level{display:flex;align-items:center;gap:14px;margin:0}
+.level svg{width:132px;height:30px;flex:none}
+.level .vial{fill:#DCE8C8;stroke:var(--ink);stroke-width:2}
+.level .bubble{fill:#F9FBF2;stroke:#7E8A68;stroke-width:1.5;transition:transform .5s var(--ease)}
+.level .mark{stroke:var(--ink);stroke-width:2}
+.level p{margin:0;font-size:1rem;line-height:1.35;color:var(--ink-2)}
+@media (min-width:900px){
+  .req .wrap{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:start}
+  .req .sec-head{position:sticky;top:0}
+  .req__grid{padding-top:clamp(56px,9vw,120px)}
+}
+
+/* kontakti — pēdējā krāsas kārta */
+.contacts{padding:clamp(64px,9vw,120px) 0 clamp(48px,6vw,80px);background:var(--paint) url(img/paint.webp) 0 0/512px;color:var(--lime)}
+.contacts .h2{color:var(--lime)}
+.contacts__tape{--r:-2deg;margin-bottom:18px}
+.bigtel{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:0 .25em;margin:22px 0 10px;font:850 clamp(3.25rem,min(14.5vw,9.4vw + 2rem),9.5rem)/.98 var(--disp);font-stretch:108%;letter-spacing:-.02em;text-decoration:none;color:var(--lime)}
+.bigtel small{font-size:.36em;font-stretch:100%;letter-spacing:0}
+.cmail{font-size:clamp(1.25rem,2.4vw,1.625rem);overflow-wrap:anywhere}
+.c__btns{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+.c__list{display:grid;gap:14px;margin:36px 0 0;padding:0;list-style:none;font-size:1.0625rem}
+.c__list dt{font:700 .8125rem/1.2 var(--disp);letter-spacing:.06em;text-transform:uppercase;opacity:.86}
+.c__list dd{margin:4px 0 0}
+.kmap{margin:0;max-width:420px}
+.kmap svg{width:100%;height:auto;overflow:visible}
+.kmap .land{fill:var(--putty);opacity:.96}
+.kmap .town{fill:var(--paint-deep)}
+.kmap .home{fill:var(--paint-deep);stroke:var(--lime);stroke-width:3}
+.kmap text{font:500 10px/1 var(--text);fill:var(--ink)}
+.kmap text.home-lbl{font:800 12px/1 var(--disp);fill:var(--paint-deep)}
+.kmap figcaption{margin-top:16px;font:800 clamp(1.75rem,3.4vw,2.75rem)/1.02 var(--disp);font-stretch:96%}
+@media (min-width:900px){
+  .bigtel{font-size:clamp(4rem,7.2vw,8rem)}
+  .contacts .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
+}
+
+.foot{padding:26px 0 30px;text-align:center}
+.foot .tape{--r:-1deg;text-transform:none;letter-spacing:.01em;font-size:.9375rem}
+.foot p{margin:14px 0 0;font-size:.9375rem;color:var(--ink)}
+
+/* piesaistītā zvana josla */
+.callbar{position:fixed;z-index:60;left:0;right:0;bottom:0;display:grid;grid-template-columns:1.4fr 1fr;gap:1px;padding:0 0 env(safe-area-inset-bottom);background:var(--paint-deep);transform:translateY(110%);transition:transform .3s var(--ease);visibility:hidden}
+.callbar.show{transform:none;visibility:visible}
+.callbar a{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;background:var(--paint);color:var(--lime);font:700 1.0625rem/1 var(--disp);text-decoration:none}
+@media (min-width:1024px){
+  .callbar{left:auto;right:24px;bottom:auto;top:16px;display:block;padding:0;background:none;transform:translateY(-140%)}
+  .callbar a{min-height:48px;padding:0 18px;border-radius:3px;box-shadow:0 6px 18px -8px rgba(36,32,27,.6)}
+  .callbar a + a{display:none}
+}
+@media (prefers-reduced-motion:reduce){.callbar{transition:none}}
+
+/* atklāšana (tikai ar GSAP) */
+.gs .rv-wipe{clip-path:inset(0 100% 0 0)}
+.gs .ridge.rv{transform:scaleX(0)}
+</style>
+</head>
+<body>
+<a class="skip" href="#kontakti">Uz kontaktiem</a>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol>
+  <symbol id="i-sms" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2zM7 11h10M7 15h6M7 7h8"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect width="20" height="16" x="2" y="4" rx="2"/></g></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="kurzeme" viewBox="0 0 169 200"><path d="M4.5 141.3L6.8 150.3L5.1 163.4L5.7 178.1L10.8 195.5L16.7 193.6L18.0 194.8L19.3 194.6L21.6 189.4L21.1 185.0L24.0 183.6L27.1 178.6L34.7 175.2L37.6 170.0L39.7 170.1L41.4 167.6L44.5 166.5L48.3 168.1L51.5 167.8L58.3 161.3L60.6 162.4L65.6 160.2L66.8 160.6L67.9 156.6L69.3 156.5L69.6 155.2L71.4 156.2L76.4 154.5L78.6 155.9L81.3 155.4L83.2 158.1L87.6 157.0L89.9 158.8L94.8 157.0L106.3 160.1L110.3 163.6L113.3 161.1L120.0 162.1L125.0 160.5L124.9 158.1L122.6 159.1L116.6 155.6L113.3 155.4L113.4 152.3L114.8 152.3L114.1 151.2L114.9 149.8L112.2 148.0L114.4 141.7L113.8 139.3L115.1 140.4L116.9 139.6L116.5 138.6L118.2 139.0L116.1 136.7L116.3 134.2L120.0 134.8L120.4 131.4L121.7 130.7L119.7 126.4L117.0 126.2L117.9 126.1L117.9 124.8L120.6 125.1L121.0 123.6L121.9 124.2L122.3 122.8L130.2 122.2L131.9 124.9L137.0 125.5L138.0 124.2L141.7 124.7L141.3 123.3L142.6 121.5L146.9 123.4L148.3 122.4L151.4 118.3L148.9 115.8L149.3 115.3L153.3 112.0L154.2 113.7L158.3 113.0L160.1 111.3L158.7 103.3L161.1 102.4L160.4 98.0L159.1 98.5L159.1 96.3L159.5 94.3L164.0 92.6L160.0 86.4L154.4 85.7L150.2 84.0L144.6 78.2L144.6 71.9L140.9 63.8L139.9 56.2L137.8 52.0L138.1 49.6L132.2 47.5L126.3 43.3L120.5 34.6L111.4 28.3L107.1 23.6L103.8 14.5L104.0 9.5L105.7 4.5L96.8 7.6L69.7 21.5L58.4 22.8L51.4 25.0L49.4 27.0L43.4 41.7L40.7 44.6L39.3 44.2L38.1 48.8L32.7 57.4L31.9 70.5L32.5 81.3L29.9 90.1L21.8 99.6L17.1 102.5L10.3 109.0L10.0 127.3L6.9 140.2L4.5 141.3Z"/></symbol>
+</svg>
+
+<main id="main">
+<section class="hero" aria-labelledby="h1">
+  <div class="wall-track" id="wallTrack">
+    <div class="wall" id="wall">
+      <div class="bands" aria-hidden="true">
+        <div class="band" style="--i:0"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+        <div class="band" style="--i:1"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+        <div class="band" style="--i:2"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+        <div class="band" style="--i:3"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+        <div class="band" style="--i:4"><div class="strip"><i class="face"></i></div><div class="rail"><i class="edge"></i></div></div>
+      </div>
+      <div class="lane" id="lane" aria-hidden="true"><div class="lane__face"><i class="streaks"></i></div></div>
+
+      <div class="wall__ui">
+        <div class="tapebar">
+          <span class="tape brandtape">GR DARBI, IK</span>
+          <a class="tape calltape" href="tel:+37127160478" aria-label="Zvanīt: +371 27160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span class="num">+371 27160478</span></a>
+        </div>
+        <h1 class="h1" id="h1"><span>Apmetu,</span> <span>špaktelēju,</span> <span>krāsoju.</span></h1>
+        <ul class="kicker" aria-label="Darbu veidi">
+          <li><a class="tape" href="#ieksdarbi">Iekšdarbi</a></li>
+          <li><a class="tape" href="#fasades">Fasādes</a></li>
+          <li><a class="tape" href="#logi-durvis">Logi un durvis</a></li>
+        </ul>
+        <div class="patch on-paint" id="patch">
+          <i class="streaks" aria-hidden="true"></i>
+          <svg class="patch__map" viewBox="0 0 169 200" aria-hidden="true"><use href="#kurzeme"/><circle class="dot" cx="66.6" cy="93.9" r="9"/></svg>
+          <div>
+            <p class="patch__big">Strādāju visā Kurzemē</p>
+            <p class="patch__small">Annas 5, Kuldīga</p>
+          </div>
+        </div>
+        <div class="swipe" id="swipe">
+          <p class="lead">Veicu visa veida iekšdarbus, fasāžu apmešanu un krāsošanu, logu un durvju maiņu un to apdari. Specializējos grīdas un sienu apdarē.</p>
+          <div class="cta">
+            <a class="btn btn-paint" id="heroCall" href="tel:+37127160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>Zvanīt <span class="num"><span class="call-cc">+371 </span>27160478</span></span></a>
+            <a class="btn btn-line" data-sms href="sms:+37127160478?&amp;body=Labdien!%0AKas%20j%C4%81dara%3A%20%0AKur%20(pils%C4%93ta)%3A%20%0AAptuven%C4%81%20plat%C4%ABba%2C%20m%C2%B2%3A%20"><svg class="ico" aria-hidden="true"><use href="#i-sms"/></svg>Sūtīt SMS</a>
+            <a class="btn btn-line btn-mail" data-mail href="mailto:ggghirts51@inbox.lv?subject=Pieteikums%20apdares%20darbiem&amp;body=Labdien!%0D%0A%0D%0AKas%20j%C4%81dara%3A%20%0D%0AKur%20(pils%C4%93ta)%3A%20%0D%0AAptuven%C4%81%20plat%C4%ABba%2C%20m%C2%B2%3A%20%0D%0A%0D%0APielikum%C4%81%20%E2%80%94%20foto%20(ja%20ir)."><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>E-pasts</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lane lane--top" id="laneTop" aria-hidden="true">
+        <div class="lane__face"><div class="clone"><p class="h1"><span>Apmetu,</span> <span>špaktelēju,</span> <span>krāsoju.</span></p></div></div>
+      </div>
+      <div class="mtape mtape--l" aria-hidden="true"><i class="mtape__paper"></i><div class="mtape__clip"><i class="mtape__paint"></i></div></div>
+      <div class="mtape mtape--r" aria-hidden="true"><i class="mtape__paper"></i><div class="mtape__clip"><i class="mtape__paint"></i></div></div>
+
+      <div class="tool trowel" id="trowel" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="gSteel" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#7C848A"/><stop offset=".42" stop-color="#D5DADD"/><stop offset=".58" stop-color="#A9B0B5"/><stop offset="1" stop-color="#E4E8EA"/></linearGradient>
+            <linearGradient id="gHandle" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4A4138"/><stop offset=".55" stop-color="#24201B"/><stop offset="1" stop-color="#171411"/></linearGradient>
+          </defs>
+          <path d="M116 44 190 7v186l-74-37Z" fill="url(#gSteel)" stroke="#646C71" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M183 10.5 190 7v186l-7-3.5Z" fill="#E7E3DB"/>
+          <path d="M122 50 176 23" stroke="#fff" stroke-opacity=".45" stroke-width="3" stroke-linecap="round"/>
+          <rect x="96" y="87" width="24" height="26" rx="3" fill="#8E969B" stroke="#646C71" stroke-width="1.5"/>
+          <rect x="6" y="83" width="94" height="34" rx="15" fill="url(#gHandle)"/>
+          <rect x="16" y="89" width="68" height="5" rx="2.5" fill="#fff" fill-opacity=".14"/>
+        </svg>
+      </div>
+      <div class="tool roller" id="roller" aria-hidden="true">
+        <div class="roller__cyl"><i class="nap"></i></div>
+        <svg class="roller__wire" viewBox="0 0 100 70" preserveAspectRatio="none"><path d="M100 0h0V28L2 64" fill="none" stroke="#6E767B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+        <i class="roller__ferrule"></i><i class="roller__handle"></i>
+      </div>
+
+      <p class="stage" aria-hidden="true"><span class="tape on">1 — apmetums</span><span class="tape">2 — špaktele</span><span class="tape">3 — lente</span><span class="tape">4 — krāsa</span><span class="tape">Siena gatava</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="works" id="darbi" aria-labelledby="h-darbi">
+  <div class="wrap sec-head">
+    <h2 class="h2 rv-wipe" id="h-darbi">Ko daru</h2>
+    <p class="sec-lede">No apmetuma līdz krāsai — iekštelpās un uz fasādēm.</p>
+  </div>
+
+  <div class="ridge rv" aria-hidden="true"></div>
+  <article class="work w1" id="ieksdarbi" aria-labelledby="h-iek">
+    <div class="wrap work__grid">
+      <div class="work__head">
+        <span class="tape work__no">01</span>
+        <h3 class="rv-wipe" id="h-iek">Iekšdarbi</h3>
+      </div>
+      <div class="work__txt">
+        <p>Veicu visa veida iekšdarbus. Specializējos sienu un grīdas apdarē. Sienas — no pilnas špaktelēšanas līdz krāsošanai.</p>
+        <ul class="chips" aria-label="Iekšdarbi">
+          <li><span class="tape">pilna špaktelēšana</span></li>
+          <li><span class="tape">krāsošana</span></li>
+          <li><span class="tape">sienu apdare</span></li>
+          <li><span class="tape">grīdas apdare</span></li>
+        </ul>
+      </div>
+      <figure class="print">
+        <div class="print__img"><img src="img/sienu-spaktelesana.webp" width="682" height="512" loading="lazy" decoding="async" alt="Telpa remonta laikā: gludi griesti, uz sienas špakteles laukumi, jauni logi."></div>
+        <figcaption>Griesti jau gludi, uz sienām — pirmie špakteles laukumi.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <div class="ridge rv" aria-hidden="true"></div>
+  <article class="work w2 rough" id="fasades" aria-labelledby="h-fas">
+    <div class="wrap work__grid">
+      <div class="work__head">
+        <span class="tape work__no">02</span>
+        <h3 class="rv-wipe" id="h-fas">Fasādes</h3>
+      </div>
+      <div class="card">
+        <p>Apmetu un krāsoju fasādes, veicu arī citus fasādes apdares darbus.</p>
+        <ul class="chips" aria-label="Fasādes">
+          <li><span class="tape">fasādes apmešana</span></li>
+          <li><span class="tape">fasādes krāsošana</span></li>
+          <li><span class="tape">fasādes apdare</span></li>
+        </ul>
+      </div>
+      <div class="swatches-wrap">
+        <div class="swatches" aria-hidden="true">
+          <figure class="swatch"><i class="sw-rough"></i><figcaption>apmetums</figcaption></figure>
+          <figure class="swatch"><i class="sw-putty"></i><figcaption>izlīdzināts</figcaption></figure>
+          <figure class="swatch"><i class="sw-paint"></i><figcaption>nokrāsots</figcaption></figure>
+        </div>
+        <p class="illu">Ilustrācija: fasādes kārtas.</p>
+      </div>
+    </div>
+  </article>
+
+  <div class="ridge rv" aria-hidden="true"></div>
+  <article class="work w3" id="logi-durvis" aria-labelledby="h-logi">
+    <div class="wrap work__grid">
+      <figure class="print">
+        <div class="print__img"><img src="img/logu-maina.webp" width="682" height="512" loading="lazy" decoding="async" alt="Jauns logs ar aizsargplēvi, aile apdarināta, aiz loga zaļš pagalms."></div>
+        <figcaption>Jauns logs vēl aizsargplēvē, aile jau apdarināta.</figcaption>
+      </figure>
+      <div class="work__head">
+        <span class="tape work__no">03</span>
+        <h3 class="rv-wipe" id="h-logi">Logi un durvis</h3>
+      </div>
+      <div class="work__txt">
+        <p>Mainu fasādes logus un durvis un veicu to apdari.</p>
+        <ul class="chips" aria-label="Logi un durvis">
+          <li><span class="tape">logu maiņa</span></li>
+          <li><span class="tape">durvju maiņa</span></li>
+          <li><span class="tape">logu un durvju apdare</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <div class="apm rough">
+    <div class="wrap">
+      <p>Apmešanas darbus veicu gan iekštelpās, gan uz fasādēm.</p>
+      <a class="btn btn-paint" href="tel:+37127160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Zvanīt <span class="num">27160478</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="photos" id="foto" aria-labelledby="h-foto">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2 rv-wipe" id="h-foto">Foto no darbiem</h2>
+    </div>
+    <div class="photos__grid">
+      <figure class="print">
+        <div class="print__img"><img src="img/pirms-remonta.webp" width="384" height="512" loading="lazy" decoding="async" alt="Istaba pirms remonta: vecas tapetes, nolietota koka grīda."><span class="tape ptape" aria-hidden="true">Pirms remonta</span></div>
+        <figcaption class="sr">Pirms remonta</figcaption>
+      </figure>
+      <figure class="print">
+        <div class="print__img"><img src="img/pec-remonta.webp" width="384" height="512" loading="lazy" decoding="async" alt="Istaba pēc remonta: gludas, gaiši krāsotas sienas, grīda apsegta ar papīru."><span class="tape ptape" aria-hidden="true">Pēc remonta</span></div>
+        <figcaption><span class="sr">Pēc remonta. </span>Grīda vēl apsegta ar papīru.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="req rough" id="pieteikums" aria-labelledby="h-req">
+  <div class="ridge" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2 rv-wipe" id="h-req">Kas jādara, kur un cik kvadrātu?</h2>
+      <p class="sec-lede">Uzrakstiet šīs trīs lietas — tad uzreiz sapratīšu, par kādu darbu ir runa. Var arī vienkārši piezvanīt.</p>
+    </div>
+    <div class="req__grid">
+      <div class="card note" id="note">
+        <fieldset>
+          <legend>Kas jādara</legend>
+          <div class="pick" id="pick">
+            <button type="button" aria-pressed="false" data-v="iekšdarbi"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Iekšdarbi</button>
+            <button type="button" aria-pressed="false" data-v="fasāde"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Fasāde</button>
+            <button type="button" aria-pressed="false" data-v="logi, durvis"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Logi, durvis</button>
+            <button type="button" aria-pressed="false" data-v="apmešana"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Apmešana</button>
+          </div>
+        </fieldset>
+        <div class="note__row">
+          <label for="fWhat">Sīkāk (nav obligāti)</label>
+          <input class="field" id="fWhat" name="what" type="text" autocomplete="off" placeholder="piem., nošpaktelēt un nokrāsot istabu">
+        </div>
+        <div class="two">
+          <div class="note__row">
+            <label for="fWhere">Kur (pilsēta vai pagasts)</label>
+            <input class="field" id="fWhere" name="where" type="text" autocomplete="address-level2" placeholder="piem., Kuldīga">
+          </div>
+          <div class="note__row">
+            <label for="fArea">Aptuvenā platība</label>
+            <div class="m2"><input class="field" id="fArea" name="area" type="text" inputmode="decimal" autocomplete="off"><span aria-hidden="true">m²</span></div>
+          </div>
+        </div>
+        <div class="level" aria-hidden="true">
+          <svg viewBox="0 0 132 30"><rect class="vial" x="2" y="4" width="128" height="22" rx="11"/><line class="mark" x1="54" y1="6" x2="54" y2="24"/><line class="mark" x1="78" y1="6" x2="78" y2="24"/><ellipse class="bubble" id="bubble" cx="66" cy="15" rx="10" ry="6"/></svg>
+          <p id="levelTxt">Aizpildiet, cik zināt — vai vienkārši zvaniet.</p>
+        </div>
+      </div>
+      <div>
+        <figure class="msg" id="msgBox" style="margin:0">
+          <span class="tape msg__lbl" aria-hidden="true">Ziņas teksts</span>
+          <figcaption class="sr">Ziņas teksts, ko nosūtīsiet</figcaption>
+          <output id="msgOut" for="fWhat fWhere fArea">Labdien!
+Kas jādara:
+Kur (pilsēta):
+Aptuvenā platība, m²: </output>
+        </figure>
+        <div class="send">
+          <a class="btn btn-paint" data-sms href="sms:+37127160478?&amp;body=Labdien!%0AKas%20j%C4%81dara%3A%20%0AKur%20(pils%C4%93ta)%3A%20%0AAptuven%C4%81%20plat%C4%ABba%2C%20m%C2%B2%3A%20"><svg class="ico" aria-hidden="true"><use href="#i-sms"/></svg>Sūtīt SMS</a>
+          <a class="btn btn-line" data-mail href="mailto:ggghirts51@inbox.lv?subject=Pieteikums%20apdares%20darbiem&amp;body=Labdien!%0D%0A%0D%0AKas%20j%C4%81dara%3A%20%0D%0AKur%20(pils%C4%93ta)%3A%20%0D%0AAptuven%C4%81%20plat%C4%ABba%2C%20m%C2%B2%3A%20%0D%0A%0D%0APielikum%C4%81%20%E2%80%94%20foto%20(ja%20ir)."><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>Rakstīt e-pastu</a>
+          <button class="btn btn-line" type="button" id="copyBtn" hidden><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg><span>Kopēt tekstu</span></button>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+        <p class="status" id="hint">SMS poga atvērs telefona īsziņu ar gatavu tekstu — atliek papildināt un nosūtīt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contacts on-paint" id="kontakti" aria-labelledby="h-kont">
+  <div class="wrap">
+    <div>
+      <span class="tape contacts__tape">Kontakti</span>
+      <h2 class="h2" id="h-kont">Zvaniet vai rakstiet</h2>
+      <a class="bigtel num" href="tel:+37127160478" aria-label="Zvanīt: +371 27160478"><small>+371</small>27160478</a>
+      <p style="margin:0"><a class="tlink cmail" href="mailto:ggghirts51@inbox.lv">ggghirts51@inbox.lv</a></p>
+      <div class="c__btns">
+        <a class="btn btn-lime" href="tel:+37127160478"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Zvanīt</a>
+        <a class="btn btn-ghost" data-sms href="sms:+37127160478?&amp;body=Labdien!%0AKas%20j%C4%81dara%3A%20%0AKur%20(pils%C4%93ta)%3A%20%0AAptuven%C4%81%20plat%C4%ABba%2C%20m%C2%B2%3A%20"><svg class="ico" aria-hidden="true"><use href="#i-sms"/></svg>Sūtīt SMS</a>
+      </div>
+      <dl class="c__list">
+        <div><dt>Uzņēmums</dt><dd>GR DARBI, IK</dd></div>
+        <div><dt>Adrese</dt><dd>Annas 5, Kuldīga, Kuldīgas nov., LV-3301</dd></div>
+      </dl>
+    </div>
+    <figure class="kmap">
+      <svg viewBox="-8 -6 190 214" role="img" aria-labelledby="kmapT">
+        <title id="kmapT">Kurzemes karte, atzīmēta Kuldīga</title>
+        <use class="land" href="#kurzeme"/>
+        <circle class="town" cx="7.5" cy="146.3" r="2.6"/><text x="12" y="143">Liepāja</text>
+        <circle class="town" cx="41.4" cy="46.3" r="2.6"/><text x="46" y="43">Ventspils</text>
+        <circle class="town" cx="104.5" cy="62.6" r="2.6"/><text x="109" y="60">Talsi</text>
+        <circle class="town" cx="98.7" cy="128.3" r="2.6"/><text x="103" y="126">Saldus</text>
+        <circle class="town" cx="139.5" cy="94" r="2.6"/><text x="123" y="108">Tukums</text>
+        <circle class="home" cx="66.6" cy="93.9" r="6"/><text class="home-lbl" x="76" y="98">Kuldīga</text>
+      </svg>
+      <figcaption>Strādāju visā Kurzemē</figcaption>
+    </figure>
+  </div>
+</section>
+</main>
+
+<footer class="foot rough">
+  <span class="tape">Koncepts — neoficiāla mājaslapa</span>
+  <p>GR DARBI, IK · Kuldīga</p>
+</footer>
+
+<div class="callbar" id="callbar">
+  <a href="tel:+37127160478" aria-label="Zvanīt: +371 27160478" tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Zvanīt</a>
+  <a data-sms href="sms:+37127160478?&amp;body=Labdien!%0AKas%20j%C4%81dara%3A%20%0AKur%20(pils%C4%93ta)%3A%20%0AAptuven%C4%81%20plat%C4%ABba%2C%20m%C2%B2%3A%20" tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#i-sms"/></svg>SMS</a>
+</div>
+
+<script src="ui.js" defer></script>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>
