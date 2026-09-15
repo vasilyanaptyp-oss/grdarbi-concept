@@ -18,22 +18,22 @@
   function text(st) {
     var kas = st.kas.join(', ');
     if (st.what) kas = kas ? kas + ' — ' + st.what : st.what;
-    return 'Labdien!\nKas jādara: ' + kas + '\nKur (pilsēta): ' + st.where + '\nAptuvenā platība, m²: ' + st.area;
+    return 'Labdien!\nKas jādara: ' + kas + '\nKur' + (st.where ? ': ' + st.where : ' (pilsēta vai pagasts): ') + '\nAptuvenā platība, m²: ' + st.area;
   }
   function subject(st) {
     var bits = [st.kas.join(', '), st.where].filter(Boolean);
-    return bits.length ? 'Pieteikums: ' + bits.join(', ') : 'Pieteikums apdares darbiem';
+    return bits.length ? 'Pieteikums: ' + bits.join(' — ') : 'Pieteikums apdares darbiem';
   }
   function update() {
     var st = state(), t = text(st);
     if (out) out.textContent = t;
     var sms = 'sms:' + TEL + '?&body=' + encodeURIComponent(t);
-    var mail = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject(st)) + '&body=' + encodeURIComponent(t.replace(/\n/g, '\r\n') + '\r\n\r\nPielikumā — foto (ja ir).');
+    var mail = 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject(st)) + '&body=' + encodeURIComponent(t.replace(/\n/g, '\r\n'));
     qa('a[data-sms]').forEach(function (a) { a.href = sms; });
     qa('a[data-mail]').forEach(function (a) { a.href = mail; });
     var n = (st.kas.length || st.what ? 1 : 0) + (st.where ? 1 : 0) + (st.area ? 1 : 0);
     if (bubble) bubble.style.transform = 'translateX(' + [34, 22, 10, 0][n] + 'px)';
-    if (levelTxt) levelTxt.textContent = ['Aizpildiet, cik zināt — vai vienkārši zvaniet.', 'Vēl divas rindas, un būs līmenī.', 'Vēl viena rinda, un būs līmenī.', 'Līmenī. Var sūtīt.'][n];
+    if (levelTxt) levelTxt.textContent = ['Aizpildiet, cik zināt. Vai vienkārši zvaniet.', 'Vēl divas rindas, un būs līmenī.', 'Vēl viena rinda, un būs līmenī.', 'Līmenī. Var sūtīt.'][n];
     document.dispatchEvent(new CustomEvent('gr:msg', { detail: { filled: n } }));
   }
   picks.forEach(function (b) {
@@ -53,15 +53,17 @@
       var t = out ? out.textContent : text(state());
       var done = function () {
         lbl.textContent = 'Nokopēts';
-        if (status) status.textContent = 'Teksts nokopēts. Ielīmējiet to īsziņā vai e-pastā uz ' + MAIL + '.';
+        if (status) status.textContent = 'Teksts nokopēts. Ielīmējiet to īsziņā uz 27160478 vai e-pastā uz ' + MAIL + '.';
         clearTimeout(tm); tm = setTimeout(function () { lbl.textContent = 'Kopēt tekstu'; }, 2400);
       };
       var legacy = function () {
-        var ta = document.createElement('textarea');
-        ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); done(); } catch (e) { if (status) status.textContent = 'Neizdevās nokopēt — atzīmējiet tekstu un kopējiet paši.'; }
+        var ta = document.createElement('textarea'), ok = false;
+        ta.value = t; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, t.length);
+        try { ok = document.execCommand('copy'); } catch (e) {}
         document.body.removeChild(ta);
+        copyBtn.focus({ preventScroll: true });
+        if (ok) done(); else if (status) status.textContent = 'Neizdevās nokopēt — iezīmējiet tekstu un nokopējiet to.';
       };
       if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(done, legacy); else legacy();
     });
@@ -87,6 +89,7 @@
       heroGone = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; set();
     }).observe(heroCall);
     new IntersectionObserver(function (e) { contactsIn = e[0].isIntersecting; set(); }, { rootMargin: '0px 0px -30% 0px' }).observe(contacts);
+    window.addEventListener('resize', set);
     var foot = q('.foot');
     if (foot) new IntersectionObserver(function (e) { footIn = e[0].isIntersecting; set(); }).observe(foot);
   }

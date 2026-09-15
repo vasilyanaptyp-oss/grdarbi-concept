@@ -43,14 +43,15 @@
     var dir = i % 2 ? -1 : 1;
     var bh = function () { return (regionH ? regionH() : H()) / n; };
     var T = function () { return trowelSize(); };
-    tl.set(rails[i], { autoAlpha: 1 }, at);
+    var at0 = at + 0.001; /* ne tieši 0: ritinot atpakaļ līdz sākumam, set tiek atcelts */
+    tl.set(rails[i], { autoAlpha: 1 }, at0);
     tl.fromTo([strips[i], rails[i]], { xPercent: -100 * dir, x: 0 }, { xPercent: 0, duration: dur, ease: 'power1.inOut' }, at);
     tl.fromTo(faces[i], { xPercent: 100 * dir, x: 0 }, { xPercent: 0, duration: dur, ease: 'power1.inOut' }, at);
     tl.set(trowel, {
       autoAlpha: 1, scaleX: dir, rotation: dir * 7, transformOrigin: '50% 50%',
       y: function () { return bh() * i + bh() / 2 - T() / 2; },
       width: T, height: T
-    }, at);
+    }, at0);
     /* darba mala: SVG x=190/200 → 95 % platuma; spoguļotā — 5 % */
     tl.fromTo(trowel,
       { x: function () { return dir === 1 ? -0.95 * T() + 4 : W() - 0.05 * T() - 4; } },
